@@ -1,2 +1,2 @@
 # Amazon-Clone
-# requirements 
+ 
