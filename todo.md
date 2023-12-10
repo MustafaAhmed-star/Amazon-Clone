@@ -3,6 +3,7 @@ Products:
         name
         flag(new,sale)
         price
+        sku
         image
         reviews:
             name
