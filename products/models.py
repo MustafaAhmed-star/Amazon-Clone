@@ -21,7 +21,7 @@ class Product(models.Model):
     tags = TaggableManager()
     brand  = models.ForeignKey('Brand',verbose_name='brand',related_name='product_brand' ,on_delete=models.SET_NULL,null = True)
     create_at = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(_('slug'),blank=True,null=True)
+    slug = models.SlugField(blank=True,null=True)
     
     
     def __str__(self):
