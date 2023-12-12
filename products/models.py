@@ -36,8 +36,8 @@ class ProductImages(models.Model):
 
 
 class Brand(models.Model):
-    name = models.CharField(max_length=100)
-    image=models.ImageField(upload_to='brand')
+    name = models.CharField(_('name'),max_length=100)
+    image=models.ImageField(_('image'),,upload_to='brand')
     slug = models.SlugField(blank=True,null=True)
     
     
@@ -49,10 +49,11 @@ class Brand(models.Model):
         super(Brand, self).save(*args,**kwargs)
     
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,null = True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    review = models.TextField(max_length=300)
-    rate = models.IntegerField(choices=[(i,i) for i in range(1,6)])
+    user = models.ForeignKey(User,verbose_name='user', on_delete=models.SET_NULL,null = True)
+    product = models.ForeignKey(Product,verbose_name='product', on_delete=models.CASCADE)
+    review = models.TextField(_('review'),max_length=300)
+    rate = models.IntegerField(_('rate'),choices=[(i,i) for i in range(1,6)])
     create_at = models.DateTimeField(auto_now=True)
     
-    
+    def __str__(self):
+        return f'{str(self.user)} review {str(self.product)}'
