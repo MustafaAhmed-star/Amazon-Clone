@@ -37,7 +37,7 @@ class ProductImages(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(_('name'),max_length=100)
-    image=models.ImageField(_('image'),,upload_to='brand')
+    image=models.ImageField(_('image'),upload_to='brand')
     slug = models.SlugField(blank=True,null=True)
     
     
