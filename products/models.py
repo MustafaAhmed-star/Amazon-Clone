@@ -2,6 +2,8 @@ from django.db import models
 from  django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
+
 FLAG_TYPES ={
     ('New','New'),
     ('Sale','Sale'),
@@ -9,17 +11,17 @@ FLAG_TYPES ={
 
 }
 class Product(models.Model):
-    name = models.CharField(max_length=200)
-    flag = models.CharField(max_length=20,choices=FLAG_TYPES)
-    price = models.FloatField()
-    image = models.ImageField(upload_to='product')
-    sku  = models.IntegerField()
-    subtitle = models.TextField(max_length=350)
-    description = models.TextField(max_length=1000)
+    name = models.CharField(_('name'),max_length=200)
+    flag = models.CharField(_('flag'),max_length=20,choices=FLAG_TYPES)
+    price = models.FloatField(_('price'),)
+    image = models.ImageField(_('image'),upload_to='product')
+    sku  = models.IntegerField(_('sku'),)
+    subtitle = models.TextField(_('subtitle'),max_length=350)
+    description = models.TextField(_('description'),max_length=1000)
     tags = TaggableManager()
-    brand  = models.ForeignKey('Brand',related_name='product_brand' ,on_delete=models.SET_NULL,null = True)
+    brand  = models.ForeignKey('Brand',verbose_name='brand',related_name='product_brand' ,on_delete=models.SET_NULL,null = True)
     create_at = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(blank=True,null=True)
+    slug = models.SlugField(_('slug'),blank=True,null=True)
     
     
     def __str__(self):
