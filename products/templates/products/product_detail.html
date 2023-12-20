@@ -597,18 +597,20 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
+                                {% for image in images  %}
+                              
+                                <li><img src=" {{image.image.url}}" alt="product"></li>
+                         
+                                {% endfor %}
+                            
                             </ul>
                             <ul class="details-thumb">
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
-                                <li><imgsrc="{% static 'en/images/product/01.jpg' %}" alt="product"></li>
+                              {% for image in images  %}
+                              
+                                <li><img src=" {{image.image.url}}" alt="product"></li>
+                         
+                                {% endfor %}
+                            
                             </ul>
                         </div>
                     </div>
