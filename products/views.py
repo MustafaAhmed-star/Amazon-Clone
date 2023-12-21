@@ -4,6 +4,7 @@ from .models import Product,Review,ProductImages,Brand
 
 class ProductList(generic.ListView):
     model = Product
+    paginate_by = 25
     
 class ProductDetail(generic.DetailView):
     model = Product

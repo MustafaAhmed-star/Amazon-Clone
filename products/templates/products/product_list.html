@@ -973,30 +973,39 @@
                             </div>
                             {% endfor %}
                         </div>
+                        {% if page_obj %}
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="bottom-paginate">
                                     <p class="page-info">Showing 12 of 60 Results</p>
                                     <ul class="pagination">
+                                    {% if page_obj.has_pervious %}
                                         <li class="page-item">
-                                            <a class="page-link" href="#">
+                                            <a class="page-link" href="?page = {{page_obj.pervious_page_number}}">
                                                 <i class="fas fa-long-arrow-alt-left"></i>
                                             </a>
                                         </li>
-                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">...</li>
-                                        <li class="page-item"><a class="page-link" href="#">60</a></li>
+                                        {% endif %}
+                                        {% for n in paginator.page_range  %}
+                                            {% if page_obj.number == n  %}
+                                             <li class="page-item"><a class="page-link active" href="#">{{n}}</a></li>
+                                            {% else %}
+                                       
+                                             <li class="page-item"><a class="page-link" href="?page = {{n}} ">{{n}}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
                                         <li class="page-item">
-                                            <a class="page-link" href="#">
+                                            <a class="page-link" href="?page = {{page_obj.next_page_number}}">
                                                 <i class="fas fa-long-arrow-alt-right"></i>
                                             </a>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
