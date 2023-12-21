@@ -14,3 +14,10 @@ class ProductDetail(generic.DetailView):
         context["images"] =  ProductImages.objects.filter(product =self.get_object())
         context["related"] =  Product.objects.filter(brand =self.get_object().brand)[:5]
         return context        
+        
+        
+class BrandList(generic.ListView):
+    model = Brand
+    
+class BrandDetail(generic.DetailView):
+    model = Brand
