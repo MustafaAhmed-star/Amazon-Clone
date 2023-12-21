@@ -12,4 +12,5 @@ class ProductDetail(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context["reviews"] = Review.objects.filter(product =self.get_object())
         context["images"] =  ProductImages.objects.filter(product =self.get_object())
+        context["related"] =  Product.objects.filter(brand =self.get_object().brand)
         return context        
