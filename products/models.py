@@ -23,7 +23,7 @@ class Product(models.Model):
     create_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True,null=True)
     class Meta:
-        ordering = ('create_at',) 
+        ordering = ('-create_at',) 
     
     def __str__(self):
         return self.name

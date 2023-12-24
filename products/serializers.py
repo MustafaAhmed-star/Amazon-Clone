@@ -4,11 +4,14 @@ from .models import Product , Brand
 
 
 class ProductListSerializers(serializers.ModelSerializer):
+    brand = serializers.StringRelatedField() 
     class Meta:
         model = Product
         fields= '__all__'
     
 class ProductDetailSerializers(serializers.ModelSerializer):
+    brand = serializers.StringRelatedField() 
+   
     class Meta:
         model = Product
         fields= '__all__'
