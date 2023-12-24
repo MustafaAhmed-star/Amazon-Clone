@@ -22,7 +22,8 @@ class Product(models.Model):
     brand  = models.ForeignKey('Brand',verbose_name='brand',related_name='product_brand' ,on_delete=models.SET_NULL,null = True)
     create_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True,null=True)
-    
+    class Meta:
+        ordering = ('create_at',) 
     
     def __str__(self):
         return self.name
