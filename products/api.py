@@ -1,12 +1,12 @@
 from rest_framework import generics
 from . import serializers
 from .models import Product,Brand 
-
+from .pagination import ProductPaginator
 
 class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = serializers.ProductListSerializers
-    
+    pagination_class = ProductPaginator
     
     
 class ProductDetailApi(generics.RetrieveAPIView):
