@@ -18,7 +18,7 @@ class ProductListSerializers(serializers.ModelSerializer):
         reviews = object.review_product.all()
         if len(reviews) > 0:
             for item in reviews:
-                total+=item
+                total+=item.rate
             avg = total/len(reviews)
         else:
             avg = 0.0
@@ -39,7 +39,7 @@ class ProductDetailSerializers(serializers.ModelSerializer):
         reviews = object.review_product.all()
         if len(reviews) > 0:
             for item in reviews:
-                total+=item
+                total+=item.rate
             avg = total/len(reviews)
         else:
             avg = 0.0
