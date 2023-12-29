@@ -2,6 +2,16 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Product,Review,ProductImages,Brand 
 
+
+
+
+
+def debug(request):
+    
+    data = Product.objects.select_related('brand').all()
+    return render(request, 'products/debug.html', {'data':data})
+
+
 class ProductList(generic.ListView):
     model = Product
     paginate_by = 25

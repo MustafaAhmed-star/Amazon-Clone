@@ -11,7 +11,8 @@ urlpatterns = [
     path('api/brands/<int:pk>',api.BrandDetailApi.as_view()),
     
     
-
+   ###
+   path('debug', views.debug),
     ####
     path('brands/',views.BrandList.as_view()),
     path('brands/<slug:slug>/',views.BrandDetail.as_view()),

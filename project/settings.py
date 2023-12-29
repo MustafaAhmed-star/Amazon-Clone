@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #packages
     'drf_yasg',
-
+    "debug_toolbar",
+    
     'taggit',
     'rest_framework',
     'django_filters',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -145,3 +148,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     
 }
+
+
+#Debugging  
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
