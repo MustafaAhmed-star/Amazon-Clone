@@ -31,6 +31,9 @@ class Product(models.Model):
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args,**kwargs)
+        
+    ## Instance methods
+    
     @property  
     def review_count(self):
         return self.review_product.all().count()

@@ -12,33 +12,37 @@ class ProductImagesSerializers(serializers.ModelSerializer):
         fields = ['image']
 class ProductListSerializers(serializers.ModelSerializer):
     brand = serializers.StringRelatedField() 
-    review_count = serializers.SerializerMethodField()
-    avg_rate = serializers.SerializerMethodField()
+    review_count = serializers.IntegerField()
+    avg_rate = serializers.FloatField()
+    # review_count = serializers.SerializerMethodField()
+    # avg_rate = serializers.SerializerMethodField()
     class Meta:
         model = Product
         fields= '__all__'
-    def get_review_count(self,object):
-        return object.review_count
+    # def get_review_count(self,object):
+    #     return object.review_count
         
-    def get_avg_rate(self,object):
+    # def get_avg_rate(self,object):
          
-        return object.avg_rate
+    #     return object.avg_rate
         
 class ProductDetailSerializers(serializers.ModelSerializer):
     brand = serializers.StringRelatedField() 
-    review_count = serializers.SerializerMethodField()
-    avg_rate = serializers.SerializerMethodField()
+    review_count = serializers.IntegerField(source='review_count', read_only=True)
+    avg_rate = serializers.FloatField(source='avg_rate', read_only=True)
+    # review_count = serializers.SerializerMethodField()
+    # avg_rate = serializers.SerializerMethodField()
     images = ProductImagesSerializers(source = 'product_image',many =True)
     reviews = ReviewSerializer(source = 'review_product',many=True)
     class Meta:
         model = Product
         fields= '__all__'
-    def get_review_count(self,object):
-        return object.review_count
+    # def get_review_count(self,object):
+    #     return object.review_count
         
-    def get_avg_rate(self,object):
+    # def get_avg_rate(self,object):
          
-        return object.avg_rate
+    #     return object.avg_rate
 class BrandListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Brand
