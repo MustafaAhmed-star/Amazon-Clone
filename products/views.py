@@ -4,8 +4,10 @@ from .models import Product,Review,ProductImages,Brand
 from django.db.models import Count
 
 
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(30)
 def debug(request):
     # data = Product.objects.select_related('brand').all()
     # data =  Product.objects.filter(price__gt= 20)
