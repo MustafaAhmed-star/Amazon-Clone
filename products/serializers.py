@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Product , Brand ,Review,ProductImages
-
+from taggit.serializers import TagListSerializerField, TaggitSerializer
+                               
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,10 +11,11 @@ class ProductImagesSerializers(serializers.ModelSerializer):
     class Meta:
         model = ProductImages
         fields = ['image']
-class ProductListSerializers(serializers.ModelSerializer):
+class ProductListSerializers(TaggitSerializer,serializers.ModelSerializer):
     brand = serializers.StringRelatedField() 
     review_count = serializers.IntegerField()
     avg_rate = serializers.FloatField()
+    tags = TagListSerializerField()
     # review_count = serializers.SerializerMethodField()
     # avg_rate = serializers.SerializerMethodField()
     class Meta:
