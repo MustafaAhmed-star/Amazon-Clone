@@ -29,13 +29,10 @@ def debug(request):
     # data = Product.objects.all()[10:40]
     # data = Product.objects.values('name','price','brand__name')
     # data = Product.objects.values('name','price')
-   
     # data = Product.objects.defer('slug','discription')
-    
     # data = Product.objects.values_list('name','price')
     # data = Product.objects.aaggregate(Sum='quantaity')
     # data = Product.objects.aaggregate(Avg=Price)
-
     # data = Product.objects.annotate(price_with_tax=F('price')*1.5)
     data = Product.objects.all()
     return render(request, 'products/debug.html', {'data':data})
