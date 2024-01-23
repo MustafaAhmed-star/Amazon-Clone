@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Product,Review,ProductImages,Brand 
 from django.db.models import Count
@@ -50,9 +50,8 @@ class ProductDetail(generic.DetailView):
         context["reviews"] = Review.objects.filter(product =self.get_object())
         context["images"] =  ProductImages.objects.filter(product =self.get_object())
         context["related"] =  Product.objects.filter(brand =self.get_object().brand)[:5]
-        return context        
-        
-        
+        return context
+
 class BrandList(generic.ListView):
     model = Brand
     paginate_by = 25
@@ -74,4 +73,20 @@ class BrandDetail(generic.ListView):
         return context
     
         
+def add_review(request,slug):
     
+    product  = Product.objects.get(slug=slug)
+    review= request.POST['review']##---> another way--> review= request.POST.get('review') in this case i only got the value of review
+    rate= request.POST['rating']
+    
+    #Adding
+    Review.objects.create(
+        user = request.user,
+        product = product,
+        review = review,
+        rate = rate,
+    
+    
+    )
+    
+    return redirect(f'/products/{product.slug}')
