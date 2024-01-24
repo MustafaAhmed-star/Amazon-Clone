@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from utils.generate_code  import generate_code
 from products.models import Product
+from accounts.models import Adress
 import datetime
 
 
@@ -19,6 +20,7 @@ class Order(models.Model):
     code = models.CharField(max_length=100,default=generate_code())
     order_time = models.DateTimeField(default=timezone.now)
     delivery_time = models.DateTimeField(null=True,blank=True)
+    delivery_location = models.ForeignKey(Adress,related_name = 'order_address',on_delete=models.CASCADE)
     coupon = models.ForeignKey('Coupon', related_name='order_coupon' ,on_delete=models.SET_NULL,null=True,blank=True)
     total_after_coupen= models.CharField(max_length=100,null=True,blank=True)
 class OrderItems(models.Model):
