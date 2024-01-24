@@ -23,6 +23,9 @@ class Order(models.Model):
     delivery_location = models.ForeignKey(Adress,related_name = 'order_address',on_delete=models.CASCADE)
     coupon = models.ForeignKey('Coupon', related_name='order_coupon' ,on_delete=models.SET_NULL,null=True,blank=True)
     total_after_coupen= models.CharField(max_length=100,null=True,blank=True)
+    
+    
+    
 class OrderItems(models.Model):
     order = models.ForeignKey(Order,related_name='order_detail',on_delete=models.CASCADE)
     product = models.ForeignKey(Product,related_name='order_product',on_delete=models.SET_NULL,null=True,blank=True)
@@ -32,7 +35,7 @@ class OrderItems(models.Model):
     
     
 class Coupon(models.Model):
-    code = models.CharField(max_legnth = 25)
+    code = models.CharField(max_length = 25)
     quatity = models.IntegerField()
     discount = models.IntegerField()
     start_date = models.DateTimeField(default = timezone.now)
