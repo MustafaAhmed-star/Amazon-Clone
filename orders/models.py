@@ -53,7 +53,9 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.user)
     
-
+    @property
+    def cart_total(self):
+        return 1
 
 class CartItems(models.Model):
    cart = models.ForeignKey(Cart,related_name='cart_items',on_delete=models.CASCADE)
