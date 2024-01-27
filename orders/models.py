@@ -14,6 +14,10 @@ ORDER_STATUS = (
     ('Shipped','Shipped'),
     ('Delivered','Delivered'),
 )
+CART_STATUS = (
+    ('InProgress','InProgress'),  
+    ('Completed','Completed')
+)
 class Order(models.Model):
     user =  models.ForeignKey(User,related_name='order_user',on_delete=models.SET_NULL,null=True,blank=True)
     status = models.CharField( max_length=50,choices=ORDER_STATUS,default='Recieved')
@@ -39,6 +43,27 @@ class OrderItems(models.Model):
     price = models.FloatField()
     quantity = models.IntegerField(default = 1)
     total = models.FloatField(null=True,blank=True)
+ 
+class Cart(models.Model):
+    user =  models.ForeignKey(User,related_name='cart_user',on_delete=models.SET_NULL,null=True,blank=True)
+    status = models.CharField( max_length=50,choices=CART_STATUS)
+    coupon = models.ForeignKey('Coupon', related_name='cart_coupon' ,on_delete=models.SET_NULL,null=True,blank=True)
+    total_after_coupon= models.CharField(max_length=100,null=True,blank=True)
+
+    def __str__(self):
+        return str(self.user)
+    
+
+
+class CartItems(models.Model):
+   cart = models.ForeignKey(Cart,related_name='cart_items',on_delete=models.CASCADE)
+   product = models.ForeignKey(Product,related_name='cart_product',on_delete=models.SET_NULL,null=True,blank=True)
+   quantity = models.IntegerField(default=1)
+   total = models.FloatField(null=True,blank=True)
+
+   def __str__(self):
+        return str(self.cart)
+
     
     
 class Coupon(models.Model):
