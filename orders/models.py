@@ -69,7 +69,7 @@ class CartItems(models.Model):
         return str(self.cart)
 
     def save(self,*args,**kwargs):
-        self.total=self.product.price * self.quantity
+        self.total=round(self.product.price * self.quantity,2)
         super(CartItems, self).save(*args, **kwargs)
 
 class Coupon(models.Model):
