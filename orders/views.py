@@ -22,7 +22,7 @@ def add_to_cart(request):
     cart = Cart.objects.get(user = request.user , status = 'InProgress')
     cartItems,created = CartItems.objects.get_or_create(cart = cart, product = product)
     if not created:
-        cartItems.quantity,cartItems.product = cartItems.quantity + quantity, product
+        cartItems.quantity += quantity
         cartItems.save()
         return redirect(f'/products/{product.slug}')
     cartItems.quantity = quantity
