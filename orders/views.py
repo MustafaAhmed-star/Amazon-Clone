@@ -18,7 +18,7 @@ def checkout(request):
 
 def add_to_cart(request):
     product = Product.objects.get(id = request.POST['product_id'])
-    quantity = int(request.POST['quantity'])
+    quantity = int(request.POST.get('quantity',1))
     cart = Cart.objects.get(user = request.user , status = 'InProgress')
     cartItems,created = CartItems.objects.get_or_create(cart = cart, product = product)
     if not created:

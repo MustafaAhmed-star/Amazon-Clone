@@ -958,10 +958,21 @@
                                             {% comment %} <del>$</del> {% endcomment %}
                                             <span>${{product.price}}<small>/piece</small></span>
                                         </h6>
-                                        <button class="product-add" title="Add to Cart">
-                                            <i class="fas fa-shopping-basket"></i>
-                                            <span>add</span>
-                                        </button>
+                                        <form action="/orders/add-to-cart" method="post" class="row">
+                                            {% csrf_token %}
+                                            <div class="col-lg-12">
+            
+                                                <input type="hidden" value="{{product.id}}" name="product_id">
+                                                <button class="product-add" title="Add to Cart" type = 'submit'>
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                    <span>add</span>
+                                                </button>
+                                                </button>
+                                            </div>
+        
+        
+                                        </form>
+                                       
                                         <div class="product-action">
                                             <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
                                             <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
