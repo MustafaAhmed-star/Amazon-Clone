@@ -55,19 +55,23 @@ class Cart(models.Model):
     
     @property
     def cart_total(self):
-        return 1
+        total = 0
+        total=sum(item.total for item in self.cart_items.all())
+        return round(total,2)
 
 class CartItems(models.Model):
-   cart = models.ForeignKey(Cart,related_name='cart_items',on_delete=models.CASCADE)
-   product = models.ForeignKey(Product,related_name='cart_product',on_delete=models.SET_NULL,null=True,blank=True)
-   quantity = models.IntegerField(default=1)
-   total = models.FloatField(null=True,blank=True)
+    cart = models.ForeignKey(Cart,related_name='cart_items',on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,related_name='cart_product',on_delete=models.SET_NULL,null=True,blank=True)
+    quantity = models.IntegerField(default=1)
+    total = models.FloatField(null=True,blank=True)
 
-   def __str__(self):
+    def __str__(self):
         return str(self.cart)
 
-    
-    
+    def save(self,*args,**kwargs):
+        self.total=self.product.price * self.quantity
+        super(CartItems, self).save(*args, **kwargs)
+
 class Coupon(models.Model):
     code = models.CharField(max_length = 25)
     quatity = models.IntegerField()
