@@ -80,6 +80,7 @@ class Coupon(models.Model):
     end_date = models.DateTimeField(null = True,blank = True)
     
     def save(self,*args,**kwargs):
-       week = datetime.timedelta(days=7)
-       self.end_date = self.start_date + week       
-       super(Coupon, self).save(*args, **kwargs)
+        if not self.end_date:
+            week = datetime.timedelta(days=7)
+            self.end_date = self.start_date + week       
+        super(Coupon, self).save(*args, **kwargs)
