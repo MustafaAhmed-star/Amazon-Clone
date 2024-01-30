@@ -5,7 +5,7 @@ from .api import OrderListApi
 
 urlpatterns = [
     path('',order_list),
-    path('checkout',checkout),
+    path('checkout/',checkout),
     path('add-to-cart',add_to_cart),
        
     #Api
