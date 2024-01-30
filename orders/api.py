@@ -13,17 +13,20 @@ class OrderListApi(generics.ListAPIView):
     serializer_class = OrderSerializer
     
     
-    # def get_queryset(self):
-    #     queryset = super(OrderListApi, self).get_queryset()
-    #     user = User.objects.get(username = self.kwargs['username'])
-    #     queryset = queryset.filter(user = user)
-    #     return queryset
-        
-    def list(self,request,*args, **kwargs):
+    def get_queryset(self):
         queryset = super(OrderListApi, self).get_queryset()
         user = User.objects.get(username = self.kwargs['username'])
-        queryset = queryset.filter(user= user) # TODO
-        data = OrderSerializer(queryset,many = True)
+        queryset = queryset.filter(user = user)
+        return queryset
         
-        return Response({'orders':data.data})
-        
+    # def list(self,request,*args, **kwargs):
+    #     queryset = super(OrderListApi, self).get_queryset()
+    #     user = User.objects.get(username = self.kwargs['username'])
+    #     queryset = queryset.filter(user= user) # TODO
+    #     data = OrderSerializer(queryset,many = True)
+    #     return Response({'orders':data.data})
+
+class OrderDetail(generics.RetrieveAPIView):
+    queryset = Order
+    serializer_class = OrderSerializer
+    
