@@ -25,7 +25,7 @@ def checkout(request):
         coupon = get_object_or_404(Coupon,code = code)
         if coupon and coupon.quantity > 0:
             today_date = datetime.datetime.today().date()
-            print(f"today_b ={today_date}+++{coupon.start_date} + {coupon.end_date}")
+            
             if today_date >= coupon.start_date.date() and today_date <= coupon.end_date.date():
                 coupon_value =  cart.cart_total * coupon.discount/100
                 subTotal = cart.cart_total - coupon_value
@@ -33,6 +33,8 @@ def checkout(request):
                 cart.coupon = coupon
                 cart.total_after_coupon = subTotal
                 cart.save()
+                coupon.quantity -=1
+                coupon.save()
                 context = {
                  'cartItems':cartItems,
                  'deliveryFee':deliveryFee,
