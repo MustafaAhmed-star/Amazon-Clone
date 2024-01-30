@@ -18,6 +18,8 @@ CART_STATUS = (
     ('InProgress','InProgress'),  
     ('Completed','Completed')
 )
+
+
 class Order(models.Model):
     user =  models.ForeignKey(User,related_name='order_user',on_delete=models.SET_NULL,null=True,blank=True)
     status = models.CharField( max_length=50,choices=ORDER_STATUS,default='Recieved')
@@ -74,7 +76,7 @@ class CartItems(models.Model):
 
 class Coupon(models.Model):
     code = models.CharField(max_length = 25)
-    quatity = models.IntegerField()
+    quantity = models.IntegerField()
     discount = models.IntegerField()
     start_date = models.DateTimeField(default = timezone.now)
     end_date = models.DateTimeField(null = True,blank = True)
