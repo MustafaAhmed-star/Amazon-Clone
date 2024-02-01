@@ -19,6 +19,7 @@ class Product(models.Model):
     subtitle = models.TextField(_('subtitle'),max_length=350)
     description = models.TextField(_('description'),max_length=1000)
     tags = TaggableManager()
+    quantity = models.IntegerField(_('quantity'),default=1)
     brand  = models.ForeignKey('Brand',verbose_name='brand',related_name='product_brand' ,on_delete=models.SET_NULL,null = True)
     create_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True,null=True)
@@ -27,7 +28,7 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
-        
+
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args,**kwargs)
