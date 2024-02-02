@@ -28,8 +28,8 @@ class Order(models.Model):
     delivery_time = models.DateTimeField(null=True,blank=True)
     delivery_location = models.ForeignKey(Adress,related_name = 'order_address',on_delete=models.CASCADE)
     coupon = models.ForeignKey('Coupon', related_name='order_coupon' ,on_delete=models.SET_NULL,null=True,blank=True)
-    total_after_coupen= models.CharField(max_length=100,null=True,blank=True)
-    
+    total_after_coupon= models.FloatField(null=True,blank=True)
+    total = models.FloatField(null=True,blank=True)
     def __str__(self):
         return f'order {self.id} for  {str(self.user)}'
     
@@ -50,7 +50,7 @@ class Cart(models.Model):
     user =  models.ForeignKey(User,related_name='cart_user',on_delete=models.SET_NULL,null=True,blank=True)
     status = models.CharField( max_length=50,choices=CART_STATUS)
     coupon = models.ForeignKey('Coupon', related_name='cart_coupon' ,on_delete=models.SET_NULL,null=True,blank=True)
-    total_after_coupon= models.CharField(max_length=100,null=True,blank=True)
+    total_after_coupon= models.FloatField(null=True,blank=True)
 
     def __str__(self):
         return str(self.user)
