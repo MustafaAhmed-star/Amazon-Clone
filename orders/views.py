@@ -75,10 +75,5 @@ def add_to_cart(request):
         return redirect(f'/products/{product.slug}')
     cartItems.quantity = quantity
     cartItems.save()
-    
-    
-    
-    
-    
+
     return redirect(f'/products/{product.slug}')
- 
