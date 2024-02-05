@@ -143,6 +143,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TAGGIT_CASE_INSENSITIVE = True
+#sending email
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 #Rest_framework
