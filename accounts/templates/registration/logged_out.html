@@ -1,0 +1,33 @@
+ 
+{% extends "auth_base.html" %}
+{% load django_bootstrap5 %}
+    
+    {% block body %}
+    
+ 
+        <section class="user-form-part">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
+                        <div class="user-form-logo">
+                            <a href="index.html"><img src="{{settings_data.logo.url}}" alt="logo"></a>
+                        </div>
+                        <div class="user-form-card">
+                            <div class="user-form-title">
+                                <h2>Logged out!</h2>
+                                <a href="{% url 'login'%}">Click here to login again.</a>
+
+                            </div>
+                          
+                        <div class="user-form-footer">
+                            <p>Greeny | &COPY; Copyright by <a href="/">{{settings_data.name}}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    USER FORM PART END
+        =======================================-->
+
+        {% endblock body %}

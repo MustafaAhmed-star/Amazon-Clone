@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     #packages
     'drf_yasg',
     "debug_toolbar",
-    
+    "django_bootstrap5",
+
     'taggit',
     'rest_framework',
     'django_filters',
@@ -49,7 +51,6 @@ INSTALLED_APPS = [
     'products',
     'settings',
     'orders',
-    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -153,6 +154,8 @@ EMAIL_HOST_PASSWORD = 'tnfhlmfqnazgfbqk'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
+
+
 #Custom authticate
 AUTHENTICATION_BACKENDS =  ['accounts.backend.EmailOrUsernameLogin']
 #Rest_framework
@@ -179,3 +182,5 @@ INTERNAL_IPS = [
 #         "LOCATION": "redis://127.0.0.1:6379",
 #     }
 # }
+
+LOGIN_REDIRECT_URL = '/'
