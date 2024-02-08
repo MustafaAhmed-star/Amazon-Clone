@@ -1,7 +1,8 @@
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
  
 ##################################
 from . import serializers
@@ -12,6 +13,8 @@ class ProductListApi(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = serializers.ProductListSerializers
     pagination_class = ProductPaginator
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter] 
     filterset_fields = ['brand', 'flag']
     search_fields = ['name','subtitle','description']
