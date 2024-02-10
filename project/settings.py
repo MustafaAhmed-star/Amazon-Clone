@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     "debug_toolbar",
     "django_bootstrap5",
+    'rest_framework_simplejwt',
 
     'taggit',
     'rest_framework',
