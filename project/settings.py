@@ -43,7 +43,13 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_bootstrap5",
     'rest_framework_simplejwt',
-
+    #auth rest
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
     'taggit',
     'rest_framework',
     'rest_framework.authtoken',
@@ -55,7 +61,7 @@ INSTALLED_APPS = [
     'settings',
     'orders',
 ]
-
+SITE_ID =1
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 
 ]
 
@@ -174,7 +181,10 @@ REST_FRAMEWORK = {
 
     ]
 }
-
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'jwt-auth',
+}
 
 
 #Debugging  
