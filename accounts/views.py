@@ -6,6 +6,8 @@ from django.conf import settings
 
 from .models import Profile
 from .forms import SignupForm,UserActivateForm
+from products.models import Product , Review , Brand
+from orders.models import Order
 # Create your views here.
 
 
@@ -53,3 +55,12 @@ def userActivate(request,username):
         form = UserActivateForm()
         
     return render(request,'accounts/activate.html',{'form':form})
+    
+def dashboard(request):
+    products = Product.objects.all().count()
+    brands = Brand.objects.all().count()
+    reviews = Review.objects.all().count()
+    orders = Order.objects.all().count()
+    context = {'products':products,'reviews':reviews,'orders':orders,'brands':brands}
+     
+    return render(request,'accounts/dashboard.html',context=context)
