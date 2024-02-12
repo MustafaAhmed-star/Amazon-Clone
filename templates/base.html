@@ -1,23 +1,35 @@
-{% load static %}
+{% load static %} 
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+ 
+<html lang="en" dir = '{% if LANGUAGE_CODE == 'ar' %}rtl{% endif %}'>
     <head>
         <!--=====================================
                     META TAG PART START
         =======================================-->
         <!-- REQUIRE META -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
 
         <!-- AUTHOR META -->
-        <meta name="author" content="mironcoder">
-        <meta name="email" content="mironcoder@gmail.com">
-        <meta name="profile" content="https://themeforest.net/user/mironcoder">
+        <meta name="author" content="mironcoder" />
+        <meta name="email" content="mironcoder@gmail.com" />
+        <meta
+            name="profile"
+            content="https://themeforest.net/user/mironcoder"
+        />
 
         <!-- TEMPLATE META -->
-        <meta name="name" content="Greeny">
-        <meta name="title" content="Greeny - eCommerce HTML Template">
-        <meta name="keywords" content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
+        <meta name="name" content="Greeny" />
+        <meta name="title" content="Greeny - eCommerce HTML Template" />
+        <meta
+            name="keywords"
+            content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store"
+        />
         <!--=====================================
                     META-TAG PART END
         =======================================-->
@@ -28,26 +40,51 @@
         <!--=====================================
                     CSS LINK PART START
         =======================================-->
-        <!-- FAVICON -->
-        <link rel="icon" href="{% static 'en/images/Amazon.jpg' %}">
+         {% if LANGUAGE_CODE == 'en' %}
+             <link rel="icon" href="{% static 'en/images/Amazon.jpg' %}">
+    
+             <!-- FONTS -->
+             <link rel="stylesheet" href="{% static 'en/fonts/flaticon/flaticon.css' %}" >
+             <link rel="stylesheet" href="{% static 'en/fonts/icofont/icofont.min.css' %}">
+             <link rel="stylesheet" href="{% static 'en/fonts/fontawesome/fontawesome.min.css' %}">
+     
+             <!-- VENDOR -->
+             <link rel="stylesheet" href="{% static 'en/vendor/venobox/venobox.min.css' %}">
+             <link rel="stylesheet" href="{% static 'en/vendor/slickslider/slick.min.css' %}">
+             <link rel="stylesheet" href="{% static 'en/vendor/niceselect/nice-select.min.css' %}">
+             <link rel="stylesheet" href="{% static 'en/vendor/bootstrap/bootstrap.min.css' %}">
+ 
+         <!-- CUSTOM -->
+         <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
+         {% else %}
+             <link rel="icon" href="{% static 'ar/images/Amazon.jpg' %}">
 
-        <!-- FONTS -->
-        <link rel="stylesheet" href="{% static 'en/fonts/flaticon/flaticon.css' %}" >
-        <link rel="stylesheet" href="{% static 'en/fonts/icofont/icofont.min.css' %}">
-        <link rel="stylesheet" href="{% static 'en/fonts/fontawesome/fontawesome.min.css' %}">
+         <!-- FONTS -->
+             <link rel="stylesheet" href="{% static 'ar/fonts/flaticon/flaticon.css' %}" >
+             <link rel="stylesheet" href="{% static 'ar/fonts/icofont/icofont.min.css' %}">
+             <link rel="stylesheet" href="{% static 'ar/fonts/fontawesome/fontawesome.min.css' %}">
+     
+             <!-- VENDOR -->
+             <link rel="stylesheet" href="{% static 'ar/vendor/venobox/venobox.min.css' %}">
+             <link rel="stylesheet" href="{% static 'ar/vendor/slickslider/slick.min.css' %}">
+             <link rel="stylesheet" href="{% static 'ar/vendor/niceselect/nice-select.min.css' %}">
+             <link rel="stylesheet" href="{% static 'ar/vendor/bootstrap/bootstrap.min.css' %}">
+     
+             <!-- CUSTOM -->
+             <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">
+         {% endif %} 
+  
 
-        <!-- VENDOR -->
-        <link rel="stylesheet" href="{% static 'en/vendor/venobox/venobox.min.css' %}">
-        <link rel="stylesheet" href="{% static 'en/vendor/slickslider/slick.min.css' %}">
-        <link rel="stylesheet" href="{% static 'en/vendor/niceselect/nice-select.min.css' %}">
-        <link rel="stylesheet" href="{% static 'en/vendor/bootstrap/bootstrap.min.css' %}">
-
-        <!-- CUSTOM -->
-        <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
-        {% block css %}
-            <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
-        {% endblock css %}
         
+        {% block css %}
+        {% if LANGUAGE_CODE == 'en' %}
+        <link rel="stylesheet" href="{% static 'en/css/index.css' %}" >
+        {% else %}
+            <link rel="stylesheet" href="{% static 'ar/css/index.css' %}" >
+        {% endif %}
+    
+        {% endblock css %}
+
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
@@ -55,7 +92,7 @@
     <body>
         <div class="backdrop"></div>
         <a class="backtop fas fa-arrow-up" href="#"></a>
-        
+
         <!--=====================================
                     HEADER TOP PART START
         =======================================-->
@@ -64,24 +101,42 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-5">
                         <div class="header-top-welcome">
-                            <p>Welcome to Ecomart in Your Dream Online Store!</p>
+                            <p>
+                                {% translate "Welcome to Ecomart in Your Dream Online Store!" %}  
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-5 col-lg-3">
                         <div class="header-top-select">
                             <div class="header-select">
                                 <i class="icofont-world"></i>
-                                <select class="select">
-                                    <option value="english" selected>english</option>
-                                    <option value="bangali">bangali</option>
-                                    <option value="arabic">arabic</option>
-                                </select>
+                                <form  id="languageForm" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                                    <select id = "languageSelect"name="language" class="select">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                                {{ language.name_local }} ({{ language.code }})
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% comment %} <input type="submit" value="Go"> {% endcomment %}
+                                </form>
+                                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                <script>
+                                    $(document).ready(function () {
+                                        $('#languageSelect').change(function () {
+                                            $('#languageForm').submit();
+                                        });
+                                    });
+                                </script>
                             </div>
                             <div class="header-select">
                                 <i class="icofont-money"></i>
-                                
-                                    <option value="english" selected>doller</option>
-                                 
+
+                                <option value="english" selected>doller</option>
                             </div>
                         </div>
                     </div>
@@ -99,8 +154,6 @@
                     HEADER TOP PART END 
         =======================================-->
 
-
-    
         <!--=====================================
                     HEADER PART START
         =======================================-->
@@ -108,41 +161,73 @@
             <div class="container">
                 <div class="header-content">
                     <div class="header-media-group">
-                        <button class="header-user"><img src="{% static 'en/images/Amazon.jpg' %}" alt="user"></button>
-                        <a href="index.html"><img src="{% static 'en/images/logo.png' %}" alt="logo"></a>
-                        <button class="header-src"><i class="fas fa-search"></i></button>
+                        <button class="header-user">
+                            <img
+                                src="{% static 'en/images/Amazon.jpg' %}"
+                                alt="user"
+                            />
+                        </button>
+                        <a href="index.html"
+                            ><img
+                                src="{% static 'en/images/logo.png' %}"
+                                alt="logo"
+                        /></a>
+                        <button class="header-src">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
 
                     {% if user.is_authenticated %}
 
-                    <a href="login.html" class="header-widget" title="My Account">
-                        <img src="{% static 'en/images/user.png' %}" alt="user">
+                    <a
+                        href="login.html"
+                        class="header-widget"
+                        title="My Account"
+                    >
+                        <img
+                            src="{% static 'en/images/user.png' %}"
+                            alt="user"
+                        />
                     </a>
                     {% else %}
-                    <a href="#">Login</a>
-                    
-                    <a href="#">Signup</a>
+                    <a href="#">{% translate "Login" %}</a>
+
+                    <a href="#">{% translate "Signup" %}</a>
                     {% endif %}
-                
 
                     <form class="header-form">
-                        <input type="text" placeholder="Search anything...">
+                        <input type="text" placeholder="Search anything..." />
                         <button><i class="fas fa-search"></i></button>
                     </form>
 
                     <div class="header-widget-group">
-                        <a href="compare.html" class="header-widget" title="Compare List">
+                        <a
+                            href="compare.html"
+                            class="header-widget"
+                            title="Compare List"
+                        >
                             <i class="fas fa-random"></i>
                             <sup>0</sup>
                         </a>
-                        <a href="wishlist.html" class="header-widget" title="Wishlist">
+                        <a
+                            href="wishlist.html"
+                            class="header-widget"
+                            title="Wishlist"
+                        >
                             <i class="fas fa-heart"></i>
                             <sup>0</sup>
                         </a>
-                        <button class="header-widget header-cart" title="Cartlist">
+                        <button
+                            class="header-widget header-cart"
+                            title="Cartlist"
+                        >
                             <i class="fas fa-shopping-basket"></i>
                             <sup>{{cart_items|length}}+</sup>
-                            <span>total price<small>${{cart_data.cart_total}}</small></span>
+                            <span
+                                >total price<small
+                                    >${{cart_data.cart_total}}</small
+                                ></span
+                            >
                         </button>
                     </div>
                 </div>
@@ -151,7 +236,6 @@
         <!--=====================================
                     HEADER PART END
         =======================================-->
-
 
         <!--=====================================
                     NAVBAR PART START
@@ -163,43 +247,57 @@
                         <div class="navbar-content">
                             <ul class="navbar-list">
                                 <li class="navbar-item dropdown">
-                                    <a class="navbar-link " href="/">home</a>
+                                    <a class="navbar-link" href="/">{% translate "home" %}</a>
                                 </li>
                                 <li class="navbar-item dropdown-megamenu">
-                                    <a class="navbar-link  " href="/products/">shop</a>
+                                    <a class="navbar-link" href="/products" > {% translate "shop" %} </a>
+                                  
+                                </li>
+                                <li class="navbar-item dropdown-megamenu">
+                                    <a
+                                        class="navbar-link"
+                                        href="/products/brands">{% translate "Brands" %}</a>
                                     
                                 </li>
-                                <li class="navbar-item dropdown-megamenu">
-                                    <a class="navbar-link  " href="/products/brands">Brands</a>
-                                     
+                                <li class="navbar-item">
+                                    <a class="navbar-link" href="#">{% translate "Orders" %}</a>
                                 </li>
-                                <li class="navbar-item  ">
-                                    <a class="navbar-link  " href="#">Orders</a>
-                                   
-                                </li>
-                                <li class="navbar-item  ">
-                                    <a class="navbar-link  " href="#">Dashboard</a>
-                                    {% comment %} <ul class="dropdown-position-list">
+                                <li class="navbar-item">
+                                    <a class="navbar-link" href="#"
+                                        >{% translate "Dashboard" %}</a>
+                                    
+                                    {% comment %}
+                                    <ul class="dropdown-position-list">
                                         <li><a href="login.html">login</a></li>
-                                        <li><a href="register.html">register</a></li>
-                                        <li><a href="reset-password.html">reset password</a></li>
-                                        <li><a href="change-password.html">change password</a></li>
-                                    </ul> {% endcomment %}
+                                        <li>
+                                            <a href="register.html">register</a>
+                                        </li>
+                                        <li>
+                                            <a href="reset-password.html"
+                                                >reset password</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a href="change-password.html"
+                                                >change password</a
+                                            >
+                                        </li>
+                                    </ul>
+                                    {% endcomment %}
                                 </li>
-                              
                             </ul>
                             <div class="navbar-info-group">
                                 <div class="navbar-info">
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
-                                        <small>call us</small>
+                                        <small>{% translate "call us" %}</small>
                                         <span>{{settings_data.call_us}}</span>
                                     </p>
                                 </div>
                                 <div class="navbar-info">
                                     <i class="icofont-ui-email"></i>
                                     <p>
-                                        <small>email us</small>
+                                        <small>{% translate "email us" %}</small>
                                         <span>{{settings_data.email_us}}</span>
                                     </p>
                                 </div>
@@ -212,31 +310,45 @@
         <!--=====================================
                     NAVBAR PART END
         =======================================-->
-        
-    {% block body %}
-    
-    {% endblock body %}
-        
-        
-          <section class="news-part" style="background: url({% static 'en/images/newsletter.jpg' %}) no-repeat center;">
+
+        {% block body %} {% endblock body %}
+
+        <section
+            class="news-part"
+            style="
+                background: url({% static 'en/images/newsletter.jpg' %}) no-repeat
+                    center;
+            "
+        >
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-5 col-lg-6 col-xl-7">
                         <div class="news-text">
                             <h2>Get 20% Discount for Subscriber</h2>
-                            <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
+                            <p>
+                                Lorem ipsum dolor consectetur adipisicing
+                                accusantium
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-7 col-lg-6 col-xl-5">
                         <form class="news-form">
-                            <input type="text" placeholder="Enter Your Email Address">
-                            <button><span><i class="icofont-ui-email"></i>Subscribe</span></button>
+                            <input
+                                type="text"
+                                placeholder="Enter Your Email Address"
+                            />
+                            <button>
+                                <span
+                                    ><i class="icofont-ui-email"></i
+                                    >Subscribe</span
+                                >
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-         <!--=====================================
+        <!--=====================================
                   CART SIDEBAR PART START
         =======================================-->
         <aside class="cart-sidebar">
@@ -245,38 +357,67 @@
                     <i class="fas fa-shopping-basket"></i>
                     <span>total item ({{cart_items|length}})</span>
                 </div>
-                <button class="cart-close"><i class="icofont-close"></i></button>
+                <button class="cart-close">
+                    <i class="icofont-close"></i>
+                </button>
             </div>
             <ul class="cart-list">
-                {% for item in cart_items  %}
-                
-              
+                {% for item in cart_items %}
+
                 <li class="cart-item">
                     <div class="cart-media">
-                        <a href="#"><img src="{{item.product.image.url}}" alt="product"></a>
-                        <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
+                        <a href="#"
+                            ><img
+                                src="{{item.product.image.url}}"
+                                alt="product"
+                        /></a>
+                        <button class="cart-delete">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
                     </div>
                     <div class="cart-info-group">
                         <div class="cart-info">
-                            <h6><a href="product-single.html">{{item.product}}</a></h6>
+                            <h6>
+                                <a href="product-single.html"
+                                    >{{item.product}}</a
+                                >
+                            </h6>
                             <p>Unit Price - ${{item.product.price}}5</p>
                         </div>
                         <div class="cart-action-group">
                             <div class="product-action">
-                                <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                <input class="action-input" title="Quantity Number" type="text" name="quantity" value="{{item.quantity}}">
-                                <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                <button
+                                    class="action-minus"
+                                    title="Quantity Minus"
+                                >
+                                    <i class="icofont-minus"></i>
+                                </button>
+                                <input
+                                    class="action-input"
+                                    title="Quantity Number"
+                                    type="text"
+                                    name="quantity"
+                                    value="{{item.quantity}}"
+                                />
+                                <button
+                                    class="action-plus"
+                                    title="Quantity Plus"
+                                >
+                                    <i class="icofont-plus"></i>
+                                </button>
                             </div>
                             <h6>${{item.total}}</h6>
                         </div>
                     </div>
-                </li> 
+                </li>
                 {% endfor %}
             </ul>
             <div class="cart-footer">
                 <a class="cart-checkout-btn" href="/orders/checkout.html">
                     <span class="checkout-label">Proceed to Checkout</span>
-                    <span class="checkout-price">${{cart_data.cart_total}}</span>
+                    <span class="checkout-price"
+                        >${{cart_data.cart_total}}</span
+                    >
                 </a>
             </div>
         </aside>
@@ -286,7 +427,6 @@
         <!--=====================================
                     NEWSLETTER PART END
         =======================================-->
-
 
         <!--=====================================
                     INTRO PART START
@@ -301,7 +441,10 @@
                             </div>
                             <div class="intro-content">
                                 <h5>free home delivery</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <p>
+                                    Lorem ipsum dolor sit amet adipisicing elit
+                                    nobis.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -312,7 +455,10 @@
                             </div>
                             <div class="intro-content">
                                 <h5>instant return policy</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <p>
+                                    Lorem ipsum dolor sit amet adipisicing elit
+                                    nobis.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -323,7 +469,10 @@
                             </div>
                             <div class="intro-content">
                                 <h5>quick support system</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <p>
+                                    Lorem ipsum dolor sit amet adipisicing elit
+                                    nobis.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -334,7 +483,10 @@
                             </div>
                             <div class="intro-content">
                                 <h5>secure payment way</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <p>
+                                    Lorem ipsum dolor sit amet adipisicing elit
+                                    nobis.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -354,34 +506,53 @@
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
                             <a class="footer-logo" href="#">
-                                <img src="{% static 'en/images/logo.png' %}" alt="logo">
+                                <img
+                                    src="{% static 'en/images/logo.png' %}"
+                                    alt="logo"
+                                />
                             </a>
-                            <p class="footer-desc">{{settings_data.subtitle}}</p>
+                            <p class="footer-desc">
+                                {{settings_data.subtitle}}
+                            </p>
                             <ul class="footer-social">
-                                <li><a class="icofont-facebook" href="{{settings_data.facebook}}"></a></li>
-                                <li><a class="icofont-twitter" href="{{settings_data.twitter}}"></a></li>
-                                <li><a class="icofont-linkedin" href="#"></a></li>
-                                <li><a class="icofont-instagram" href="#"></a></li>
-                                <li><a class="icofont-pinterest" href="#"></a></li>
+                                <li>
+                                    <a
+                                        class="icofont-facebook"
+                                        href="{{settings_data.facebook}}"
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="icofont-twitter"
+                                        href="{{settings_data.twitter}}"
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="icofont-linkedin" href="#"></a>
+                                </li>
+                                <li>
+                                    <a class="icofont-instagram" href="#"></a>
+                                </li>
+                                <li>
+                                    <a class="icofont-pinterest" href="#"></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget contact">
-                            <h3 class="footer-title">contact us</h3>
+                            <h3 class="footer-title">{% translate "contact us" %}</h3>
                             <ul class="footer-contact">
                                 <li>
                                     <i class="icofont-ui-email"></i>
                                     <p>
                                         <span>{{settings_data.email}}</span>
-                                         
                                     </p>
                                 </li>
                                 <li>
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
                                         <span>{{settings_data.phones}}</span>
-                                         
                                     </p>
                                 </li>
                                 <li>
@@ -414,11 +585,23 @@
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">Download App</h3>
-                            <p class="footer-desc">Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi autem obcaecati minus ducimus totam reprehenderit exercitationem!</p>
+                            <h3 class="footer-title">{% translate "Download App" %}</h3>
+                            <p class="footer-desc">
+                                Lorem ipsum dolor sit amet tenetur dignissimos
+                                ipsum eligendi autem obcaecati minus ducimus
+                                totam reprehenderit exercitationem!
+                            </p>
                             <div class="footer-app">
-                                <a href="#"><img src="{% static 'en/images/google-store.png' %}" alt="google"></a>
-                                <a href="#"><img src="{% static 'en/images/app-store.png' %}" alt="app"></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/google-store.png' %}"
+                                        alt="google"
+                                /></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/app-store.png' %}"
+                                        alt="app"
+                                /></a>
                             </div>
                         </div>
                     </div>
@@ -426,12 +609,35 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="footer-bottom">
-                            <p class="footer-copytext">&copy;  All Copyrights Reserved by <a target="_blank" href="https://themeforest.net/user/mironcoder">Mironcoder</a></p>
+                            <p class="footer-copytext">
+                                &copy; All Copyrights Reserved by
+                                <a
+                                    target="_blank"
+                                    href="https://themeforest.net/user/mironcoder"
+                                    >Mironcoder</a
+                                >
+                            </p>
                             <div class="footer-card">
-                                <a href="#"><img src="{% static 'en/images/payment/jpg/01.jpg' %}" alt="payment"></a>
-                                <a href="#"><img src="{% static 'en/images/payment/jpg/02.jpg' %}" alt="payment"></a>
-                                <a href="#"><img src="{% static 'en/images/payment/jpg/03.jpg' %}" alt="payment"></a>
-                                <a href="#"><img src="{% static 'en/images/payment/jpg/04.jpg' %}" alt="payment"></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/payment/jpg/01.jpg' %}"
+                                        alt="payment"
+                                /></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/payment/jpg/02.jpg' %}"
+                                        alt="payment"
+                                /></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/payment/jpg/03.jpg' %}"
+                                        alt="payment"
+                                /></a>
+                                <a href="#"
+                                    ><img
+                                        src="{% static 'en/images/payment/jpg/04.jpg' %}"
+                                        alt="payment"
+                                /></a>
                             </div>
                         </div>
                     </div>
@@ -441,12 +647,12 @@
         <!--=====================================
                       FOOTER PART END
         =======================================-->
-        
 
         <!--=====================================
                     JS LINK PART START
         =======================================-->
         <!-- VENDOR -->
+    {% if LANGUAGE_CODE == 'en'  %}
         <script src="{% static 'en/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
         <script src="{% static 'en/vendor/bootstrap/popper.min.js' %}"></script>
         <script src="{% static 'en/vendor/bootstrap/bootstrap.min.js' %}"></script>
@@ -454,14 +660,33 @@
         <script src="{% static 'en/vendor/niceselect/nice-select.min.js' %}"></script>
         <script src="{% static 'en/vendor/slickslider/slick.min.js' %}"></script>
         <script src="{% static 'en/vendor/venobox/venobox.min.js' %}"></script>
-
+    
         <!-- CUSTOM -->
         <script src="{% static 'en/js/nice-select.js' %}"></script>
         <script src="{% static 'en/js/countdown.js' %}"></script>
         <script src="{% static 'en/js/accordion.js' %}"></script>
         <script src="{% static 'en/s/venobox.js' %}"></script>
         <script src="{% static 'en/js/slick.js' %}"></script>
-        <script src="{% static 'en/js/main.js' %}"></script> 
+        <script src="{% static 'en/js/main.js' %}"></script>
+    {% else %}
+    
+        <script src="{% static 'ar/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/bootstrap/popper.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/countdown/countdown.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/niceselect/nice-select.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/slickslider/slick.min.js' %}"></script>
+        <script src="{% static 'ar/vendor/venobox/venobox.min.js' %}"></script>
+    
+        <!-- CUSTOM -->
+        <script src="{% static 'ar/js/nice-select.js' %}"></script>
+        <script src="{% static 'ar/js/countdown.js' %}"></script>
+        <script src="{% static 'ar/js/accordion.js' %}"></script>
+        <script src="{% static 'ar/s/venobox.js' %}"></script>
+        <script src="{% static 'ar/js/slick.js' %}"></script>
+        <script src="{% static 'ar/js/main.js' %}"></script>
+    {% endif %}    
+        
         <!--=====================================
                     JS LINK PART END
         =======================================-->
