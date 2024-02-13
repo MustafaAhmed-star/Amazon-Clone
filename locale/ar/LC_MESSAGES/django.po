@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-12 21:59+0200\n"
+"POT-Creation-Date: 2024-02-13 07:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\products\models.py:31 .\products\models.py:71
+#: .\accounts\apps.py:8
+msgid "accounts"
+msgstr "الحسابات"
+
+#: .\orders\apps.py:8 .\templates\base.html:264
+msgid "Orders"
+msgstr "الطلبات"
+
+#: .\products\apps.py:8 .\products\models.py:53
+msgid "Products"
+msgstr "المنتجات"
+
+#: .\products\models.py:31 .\products\models.py:72
 msgid "name"
 msgstr "الاسم"
 
@@ -31,7 +43,7 @@ msgstr "العلم"
 msgid "price"
 msgstr "السعر"
 
-#: .\products\models.py:34 .\products\models.py:72
+#: .\products\models.py:34 .\products\models.py:73
 msgid "image"
 msgstr "صورة"
 
@@ -51,58 +63,54 @@ msgstr "الوصف"
 msgid "quantity"
 msgstr "الكمية"
 
-#: .\products\models.py:86
+#: .\products\models.py:87
 msgid "review"
 msgstr "مراجعة"
 
-#: .\products\models.py:87
+#: .\products\models.py:88
 msgid "rate"
 msgstr "معدل"
 
-#: .\templates\base.html:99
+#: .\templates\base.html:105
 msgid "Welcome to Ecomart in Your Dream Online Store!"
 msgstr "مرحبا بك في متجر التسوق الاونلاين "
 
-#: .\templates\base.html:180
+#: .\templates\base.html:194
 msgid "Login"
 msgstr "تسيجل دخول"
 
-#: .\templates\base.html:182
+#: .\templates\base.html:196
 msgid "Signup"
 msgstr "تسجيل"
 
-#: .\templates\base.html:237
+#: .\templates\base.html:251
 msgid "home"
 msgstr "الرئيسيه"
 
-#: .\templates\base.html:240
+#: .\templates\base.html:254
 msgid "shop"
 msgstr "تسوق"
 
-#: .\templates\base.html:246
+#: .\templates\base.html:260
 msgid "Brands"
 msgstr "العلامات التجاريه"
 
-#: .\templates\base.html:250
-msgid "Orders"
-msgstr "الطلبات"
-
-#: .\templates\base.html:254
+#: .\templates\base.html:268
 msgid "Dashboard"
 msgstr "منصة "
 
-#: .\templates\base.html:281
+#: .\templates\base.html:295
 msgid "call us"
 msgstr "اتصل بنا "
 
-#: .\templates\base.html:288
+#: .\templates\base.html:302
 msgid "email us"
 msgstr "ارسل لنا"
 
-#: .\templates\base.html:532
+#: .\templates\base.html:546
 msgid "contact us"
 msgstr "تكلم معنا"
 
-#: .\templates\base.html:576
+#: .\templates\base.html:590
 msgid "Download App"
 msgstr "حمل التطبيق"

@@ -49,7 +49,8 @@ class Product(models.Model):
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args,**kwargs)
-        
+    class  Meta:
+        verbose_name = _("Products")
     ## Instance methods
     
     @property  
