@@ -114,7 +114,7 @@ DATABASES = {
         "NAME": "Amazon",
         "USER": "postgres",
         "PASSWORD": "postgres",
-        "HOST": "db",
+        "HOST": 'db',
         "PORT": "5432",
     }
 }
@@ -221,12 +221,13 @@ INTERNAL_IPS = [
 #         "LOCATION": "redis://127.0.0.1:6379",
 #     }
 # }
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://redis:6379/0",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://redis:6379/0",
+#     }
+# }
 
-
+CELERY_BORKER_URL='redis://127.0.0.1:6379'
+CELERY_BACKEDN_RESULTS='redis://127.0.0.1:6379'
 LOGIN_REDIRECT_URL = '/'

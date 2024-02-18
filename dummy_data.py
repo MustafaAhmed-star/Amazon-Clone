@@ -5,7 +5,7 @@ django.setup()
 
 import random
 from faker import Faker
-from products.models import Product,Brand,Review
+from products.models import Product,Brand
 
 fake = Faker()
 
@@ -45,5 +45,5 @@ def seed_reviews(n):
     pass
 
 
-# seed_brand(200)
+seed_brand(200)
 seed_products(500)
