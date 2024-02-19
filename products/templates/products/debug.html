@@ -10,12 +10,13 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+    <h1>  Hello world</h1>
        <ul>
-       {% for object in data %}
+       {% comment %} {% for object in data %}
        
-     
-       <li>{{object}}--{{object.brand}}</li>
-         {% endfor %}
+   
+       <li>{{object}}--{{object.brand}}</li> {% endcomment %}
+         {% comment %} {% endfor %} {% endcomment %}
        </ul>
         <script src="" async defer></script>
     </body>

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Product,Review,ProductImages,Brand 
 from django.db.models import Count
-from .tasks import test
-
+from .tasks import execute_something
+import time
 from django.views.decorators.cache import cache_page
 
 
@@ -35,7 +35,7 @@ def debug(request):
     # data = Product.objects.aaggregate(Avg=Price)
     # data = Product.objects.annotate(price_with_tax=F('price')*1.5)
     # data = Product.objects.all()
-    test().delay()
+    execute_something.delay()
     
     return render(request, 'products/debug.html', {})
 
