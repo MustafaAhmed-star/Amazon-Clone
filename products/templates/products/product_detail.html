@@ -870,6 +870,8 @@
                     dataType: 'json',
                     success:function(response){
                         $('#cartItems').html(response['result'])
+                        $('#cartTotal').text(response['total'])
+                        $('#cartCount').text(response['cart_count'])
                        
                     },
                     error:function(response){

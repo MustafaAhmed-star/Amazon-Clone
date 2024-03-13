@@ -80,6 +80,8 @@ def add_to_cart(request):
     #ajax
     cart = Cart.objects.get(user = request.user , status = 'InProgress')
     cartItems = CartItems.objects.filter(cart = cart)
-    cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems})
-
-    return JsonResponse({'result':cartItems})
+    total = cart.cart_total
+    cartCount  = len(cartItems)
+    cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems , 'cartdata':cart})
+   
+    return JsonResponse({'result':cartItems , 'total':total,'cart_count':cartCount})

@@ -222,10 +222,9 @@
                             title="Cartlist"
                         >
                             <i class="fas fa-shopping-basket"></i>
-                            <sup>{{cart_items|length}}+</sup>
+                            <sup id = 'cartCount''>{{cart_items|length}}+</sup>
                             <span
-                                >total price<small
-                                    >${{cart_data.cart_total}}</small
+                                >total price<small id = 'cartTotal'>${{cart_data.cart_total}}</small
                                 ></span
                             >
                         </button>
