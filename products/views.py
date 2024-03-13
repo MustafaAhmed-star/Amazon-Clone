@@ -5,6 +5,8 @@ from django.db.models import Count
 from .tasks import execute_something
 import time
 from django.views.decorators.cache import cache_page
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 
 @cache_page(30)
@@ -90,5 +92,10 @@ def add_review(request,slug):
     
     
     )
-    
-    return redirect(f'/products/{product.slug}')
+    #Aja
+    reviews = Review.objects.filter(product=product)
+    page = render_to_string('includes/reviews.html',{'reviews':reviews})
+    return JsonResponse({'result':page})
+
+    # return redirect(f'/products/{product.slug}')
+
