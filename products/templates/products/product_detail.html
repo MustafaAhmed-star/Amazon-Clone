@@ -11,7 +11,7 @@
         {% block body %}
         
       
-        <aside class="category-sidebar">
+        {% comment %} <aside class="category-sidebar">
             <div class="category-header">
                 <h4 class="category-title">
                     <i class="fas fa-align-left"></i>
@@ -156,7 +156,7 @@
             <div class="category-footer">
                 <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
             </div>
-        </aside>
+        </aside> {% endcomment %}
         <!--=====================================
                 CATEGORY SIDEBAR PART END
         =======================================-->
@@ -648,7 +648,7 @@
                             </div>
                             <div class="details-add-group">
                                 {% if object.quantity > 0  %}
-                                    <form action="/orders/add-to-cart" method="post" class="row">
+                                    <form action="/orders/add-to-cart" id = "cartForm" method="post" class="row">
                                         {% csrf_token %}
                                         <div class="col-lg-6">
                                             <input class="action-input" title="Quantity Number" type="number" name="quantity" value="1">
@@ -854,6 +854,23 @@
                     success:function(response){
                         $('#all-reviews').html(response['result'])
                         $('#reviewForm').trigger('reset')
+                    },
+                    error:function(response){
+                        console.log(response)
+                    }
+                })
+            })
+            
+            $(document).on('submit','#cartForm',function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success:function(response){
+                        $('#cartItems').html(response['result'])
+                       
                     },
                     error:function(response){
                         console.log(response)

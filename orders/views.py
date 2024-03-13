@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect , get_object_or_404
 from .models import Order,Cart,CartItems,Coupon
 import datetime
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 from products.models import Product
 from settings.models import DeliveryFee
 
@@ -75,5 +77,9 @@ def add_to_cart(request):
         return redirect(f'/products/{product.slug}')
     cartItems.quantity = quantity
     cartItems.save()
+    #ajax
+    cart = Cart.objects.get(user = request.user , status = 'InProgress')
+    cartItems = CartItems.objects.filter(cart = cart)
+    cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems})
 
-    return redirect(f'/products/{product.slug}')
+    return JsonResponse({'result':cartItems})
