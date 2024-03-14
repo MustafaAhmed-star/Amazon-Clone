@@ -7,7 +7,7 @@ urlpatterns = [
     path('',order_list),
     path('checkout/',checkout),
     path('add-to-cart',add_to_cart),
-    path('checkout/payment/process',payment_process),
+    path('checkout/payment-process',payment_process),
     path('checkout/payment/success',payment_success),
     path('checkout/payment/failed',payment_failed),
        

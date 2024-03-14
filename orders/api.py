@@ -77,7 +77,7 @@ class OrderCreateApi(generics.GenericAPIView):
             code = code , 
             delivery_location = user_address,
             coupon = cart.coupon,
-            total_after_coupen=cart.total_after_coupon,
+            total_after_coupon=cart.total_after_coupon,
             total = cart.cart_total
         )
         #orderItems
