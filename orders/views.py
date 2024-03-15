@@ -81,7 +81,16 @@ def add_to_cart(request):
     if not created:
         cartItems.quantity += quantity
         cartItems.save()
-        return redirect(f'/products/{product.slug}')
+        cart = Cart.objects.get(user = request.user , status = 'InProgress')
+        cartItems = CartItems.objects.filter(cart = cart)
+        total = cart.cart_total
+        cartCount  = len(cartItems)
+        cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems , 'cart_data':cart})
+       
+        return JsonResponse({'result':cartItems , 'total':total,'cart_data':cartCount})
+
+
+        # return redirect(f'/products/{product.slug}')
     cartItems.quantity = quantity
     cartItems.save()
     #ajax
@@ -89,9 +98,9 @@ def add_to_cart(request):
     cartItems = CartItems.objects.filter(cart = cart)
     total = cart.cart_total
     cartCount  = len(cartItems)
-    cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems , 'cartdata':cart})
+    cartItems = render_to_string('includes/cart.html',{'cart_items':cartItems , 'cart_data':cart})
    
-    return JsonResponse({'result':cartItems , 'total':total,'cart_count':cartCount})
+    return JsonResponse({'result':cartItems , 'total':total,'cart_data':cartCount})
 
 
 def payment_process(request):

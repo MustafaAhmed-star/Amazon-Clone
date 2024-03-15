@@ -871,7 +871,7 @@
                     success:function(response){
                         $('#cartItems').html(response['result'])
                         $('#cartTotal').text(response['total'])
-                        $('#cartCount').text(response['cart_count'])
+                        $('#cartCount').text(response['cart_data'])
                        
                     },
                     error:function(response){
@@ -883,7 +883,7 @@
         </script>
             
       
-   
-        
-        
         {% endblock body %}
+        
+        
+        

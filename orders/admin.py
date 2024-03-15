@@ -6,7 +6,10 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItems
 
 
-
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['user','status']
+    list_filter = ['status']
+    search_fields  = ['status']
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -14,5 +17,5 @@ class OrderAdmin(admin.ModelAdmin):
     # ... other admin configuration for Order
 
 admin.site.register(Coupon)
-admin.site.register(Cart)
+admin.site.register(Cart,CartAdmin)
 admin.site.register(CartItems)
